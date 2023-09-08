@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:rmh_app_flutter/screens/home.dart';
+import 'package:rmh_app_flutter/screens/search.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -33,7 +33,7 @@ class _SplashScreenState extends State<SplashScreen> {
         const Duration(seconds: 3),
         () => Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => const  HomePage()),
+              MaterialPageRoute(builder: (context) => const  SearchPage()),
             ));
   }
 
@@ -44,7 +44,11 @@ class _SplashScreenState extends State<SplashScreen> {
       backgroundColor: const Color.fromARGB(255, 32, 29, 82),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
-        child: Center(child: Image.asset('assets/images/Logo_white.png')),
+        child: Center(child: GestureDetector(onTap: () {Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const  SearchPage()),
+            );},
+        child: Image.asset('assets/images/Logo_white.png'))),
       ),
     );
   }
