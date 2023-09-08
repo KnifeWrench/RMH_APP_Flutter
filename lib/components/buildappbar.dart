@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
 
-Widget getAppBar(double viabilityScore, incrementCounter, decrametCounter) {
+Widget getAppBar(double viabilityScore) {
   return Container(
     decoration: const BoxDecoration(
         color: Colors.white,
@@ -27,22 +27,6 @@ Widget getAppBar(double viabilityScore, incrementCounter, decrametCounter) {
               const Expanded(
                 child: SizedBox(width: 100),
               ),
-              FloatingActionButton(
-                heroTag: "btn1",
-                backgroundColor: const Color.fromARGB(255, 218, 125, 3),
-                foregroundColor: Colors.black,
-                mini: true,
-                onPressed: decrametCounter,
-                child: const Icon(Icons.remove),
-              ),
-              FloatingActionButton(
-                heroTag: "btn2",
-                backgroundColor: const Color.fromARGB(255, 218, 125, 3),
-                foregroundColor: Colors.black,
-                mini: true,
-                onPressed: incrementCounter,
-                child: const Icon(Icons.add),
-              )
             ],
           ),
         ],

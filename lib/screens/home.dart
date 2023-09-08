@@ -5,6 +5,8 @@ import '../components/buildsearchbar.dart';
 
 import 'package:rmh_app_flutter/classes/crime_data_class.dart';
 
+final TextEditingController postcodeInputController = TextEditingController();
+
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
   @override
@@ -12,27 +14,18 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  late Future<CrimeDataClass> futureAlbum;
+  Future<CrimeDataClass>? futureAlbum;
 
   @override
   void initState() {
     super.initState();
-    futureAlbum = fetchAlbum();
+    //Init call to API
+    // futureAlbum = fetchAlbum();
   }
 
+  bool isMyFutureInitialized = false;
   var viabilityScore = 690.0;
-
-  void _incrementCounter() {
-    setState(() {
-      viabilityScore = viabilityScore + 10;
-    });
-  }
-
-  void _decrametCounter() {
-    setState(() {
-      viabilityScore = viabilityScore - 10;
-    });
-  }
+  var postCode = 'SN1 4GE';
 
   @override
   Widget build(BuildContext context) {
@@ -42,35 +35,59 @@ class _HomePageState extends State<HomePage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            // Top Menu
-            Padding(
-              padding: const EdgeInsets.fromLTRB(10, 50, 10, 15),
-              child: getAppBar(
-                  viabilityScore, _incrementCounter, _decrametCounter),
-            ),
+            //Top Menu
+            // Padding(
+            //   padding: const EdgeInsets.fromLTRB(10, 50, 10, 15),
+            //   child: getAppBar(
+            //       viabilityScore),
+            // ),
             //Crime Box
-            getListTile(),
+            // getListTile(),
             // Search box
-            getSearchBar(),
-            FutureBuilder<CrimeDataClass>(
-              future: futureAlbum,
-              builder: (context, snapshot) {
-                if (snapshot.hasData) {
-                  return Column(children: <Widget>[
-                    Text("Postcode: ${snapshot.data!.pcd}"),
-                    Text("Population: ${snapshot.data!.populationTotal}"),
-                    Text("Crime Count: ${snapshot.data!.crimeCount}"),
-                    Text("Prev Crime Count: ${snapshot.data!.previousCrimeCount}"),
-                    Text("Delta: ${snapshot.data!.delta}"),
-                  ]);
-                } else if (snapshot.hasError) {
-                  return Text('${snapshot.error}');
-                }
-
-                // By default, show a loading spinner.
-                return const CircularProgressIndicator();
+            Padding(
+              padding: const EdgeInsets.fromLTRB(10, 100, 10, 15),
+              child: TextField(
+                controller: postcodeInputController,
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  hintText: 'Enter a search term',
+                ),
+              ),
+            ),
+            ElevatedButton(
+              child: Text('Fetch Data'),
+              onPressed: () {
+                setState(() {
+                  futureAlbum = fetchAlbum(postcodeInputController.text);
+                });
               },
             ),
+            futureAlbum == null
+                ? Container() // Display an empty container or any placeholder you'd like
+                : FutureBuilder<CrimeDataClass>(
+                    future: futureAlbum,
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return CircularProgressIndicator();
+                      } else if (snapshot.hasError) {
+                        return Text('Error: ${snapshot.error}');
+                      } else if (!snapshot.hasData) {
+                        return Text('No data available');
+                      } else {
+                        return Column(
+                          children: <Widget>[
+                            Text("Postcode: ${snapshot.data!.pcd}"),
+                            Text(
+                                "Population: ${snapshot.data!.populationTotal}"),
+                            Text("Crime Count: ${snapshot.data!.crimeCount}"),
+                            Text(
+                                "Prev Crime Count: ${snapshot.data!.previousCrimeCount}"),
+                            Text("Delta: ${snapshot.data!.delta}"),
+                          ],
+                        );
+                      }
+                    },
+                  )
           ],
         ),
       ),
