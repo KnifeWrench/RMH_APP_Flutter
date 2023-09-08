@@ -18,7 +18,7 @@ Widget getSearchBar() {
       ElevatedButton(
         child: Text("Tap on this"),
         style: ElevatedButton.styleFrom(
-          primary: Colors.red,
+          backgroundColor: Colors.red,
           elevation: 0,
         ),
         onPressed: () {

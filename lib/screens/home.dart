@@ -22,8 +22,6 @@ class _HomePageState extends State<HomePage> {
 
   var viabilityScore = 690.0;
 
-  
-
   void _incrementCounter() {
     setState(() {
       viabilityScore = viabilityScore + 10;
@@ -54,7 +52,25 @@ class _HomePageState extends State<HomePage> {
             getListTile(),
             // Search box
             getSearchBar(),
-            
+            FutureBuilder<CrimeDataClass>(
+              future: futureAlbum,
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  return Column(children: <Widget>[
+                    Text("Postcode: ${snapshot.data!.pcd}"),
+                    Text("Population: ${snapshot.data!.populationTotal}"),
+                    Text("Crime Count: ${snapshot.data!.crimeCount}"),
+                    Text("Prev Crime Count: ${snapshot.data!.previousCrimeCount}"),
+                    Text("Delta: ${snapshot.data!.delta}"),
+                  ]);
+                } else if (snapshot.hasError) {
+                  return Text('${snapshot.error}');
+                }
+
+                // By default, show a loading spinner.
+                return const CircularProgressIndicator();
+              },
+            ),
           ],
         ),
       ),
