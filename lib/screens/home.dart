@@ -1,10 +1,9 @@
-import 'package:flutter/material.dart';
-import 'package:rmh_app_flutter/screens/search.dart';
-import '../components/buildappbar.dart';
-import '../components/buildlisttile.dart';
-import '../components/buildsearchbar.dart';
+// ignore_for_file: must_be_immutable
 
+import 'package:flutter/material.dart';
 import 'package:rmh_app_flutter/classes/crime_data_class.dart';
+import 'package:rmh_app_flutter/screens/crime.dart';
+import 'package:rmh_app_flutter/screens/crimescreens/crimeagrtable.dart';
 
 final TextEditingController postcodeInputController = TextEditingController();
 
@@ -42,11 +41,21 @@ class _HomePageState extends State<HomePage> {
                 padding: const EdgeInsets.fromLTRB(10, 100, 10, 15),
                 child: Column(
                   children: [
+                    const Text("Home Page"),
                     Text("Postcode: ${widget.data!.pcd}"),
                     Text("Population: ${widget.data!.populationTotal}"),
                     Text("Crime Count: ${widget.data!.crimeCount}"),
                     Text("Prev Crime Count: ${widget.data!.previousCrimeCount}"),
                     Text("Delta: ${widget.data!.delta}"),
+                    ElevatedButton(
+            child: Text('Crime'),
+            onPressed: () {final result = widget.data;
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => CrimePage(data: result)),
+              );
+            },
+          ),
                   ],
                 ),
               )

@@ -9,24 +9,14 @@ var postCode = 'SN1 4DH';
 
 Widget getSearchBar() {
 
-  return Column(
+  return const Column(
     children: <Widget>[
-      const TextField(
+      TextField(
         decoration: InputDecoration(
           border: OutlineInputBorder(),
           hintText: 'Enter a search term',
         ),
       ),
-      // ElevatedButton(
-      //   child: Text("Tap on this"),
-      //   style: ElevatedButton.styleFrom(
-      //     backgroundColor: Colors.red,
-      //     elevation: 0,
-      //   ),
-      //   onPressed: () {
-      //         // futureAlbum = fetchAlbum();
-      //   },
-      // ),
     ],
   );
 }

@@ -5,10 +5,10 @@ class CrimeDataClass {
   num ? previousCrimeCount;
   num ? delta;
   List<CrimeAgrTable>? crimeAgrTable;
-  // List<CrimeGeoTable>? crimeGeoTable;
-  // ShortPcdRanking? shortPcdRanking;
-  // PcdDistrictRanking? pcdDistrictRanking;
-  // PcdNationalRanking? pcdNationalRanking;
+  List<CrimeGeoTable>? crimeGeoTable;
+  ShortPcdRanking? shortPcdRanking;
+  PcdDistrictRanking? pcdDistrictRanking;
+  PcdNationalRanking? pcdNationalRanking;
 
   CrimeDataClass(
       { required this.pcd,
@@ -17,10 +17,10 @@ class CrimeDataClass {
       this.previousCrimeCount,
       this.delta,
       this.crimeAgrTable,
-      // this.crimeGeoTable,
-      // this.shortPcdRanking,
-      // this.pcdDistrictRanking,
-      // this.pcdNationalRanking
+      this.crimeGeoTable,
+      this.shortPcdRanking,
+      this.pcdDistrictRanking,
+      this.pcdNationalRanking
       });
 
   CrimeDataClass.fromJson(Map<String, dynamic> json) {
@@ -35,21 +35,21 @@ class CrimeDataClass {
         crimeAgrTable!.add(CrimeAgrTable.fromJson(v));
       });
     }
-    // if (json['crimeGeoTable'] != null) {
-    //   crimeGeoTable = <CrimeGeoTable>[];
-    //   json['crimeGeoTable'].forEach((v) {
-    //     crimeGeoTable!.add(CrimeGeoTable.fromJson(v));
-    //   });
-    // }
-    // shortPcdRanking = json['shortPcdRanking'] != null
-    //     ? ShortPcdRanking.fromJson(json['shortPcdRanking'])
-    //     : null;
-    // pcdDistrictRanking = json['pcdDistrictRanking'] != null
-    //     ? PcdDistrictRanking.fromJson(json['pcdDistrictRanking'])
-    //     : null;
-    // pcdNationalRanking = json['pcdNationalRanking'] != null
-    //     ? PcdNationalRanking.fromJson(json['pcdNationalRanking'])
-    //     : null;
+    if (json['crimeGeoTable'] != null) {
+      crimeGeoTable = <CrimeGeoTable>[];
+      json['crimeGeoTable'].forEach((v) {
+        crimeGeoTable!.add(CrimeGeoTable.fromJson(v));
+      });
+    }
+    shortPcdRanking = json['shortPcdRanking'] != null
+        ? ShortPcdRanking.fromJson(json['shortPcdRanking'])
+        : null;
+    pcdDistrictRanking = json['pcdDistrictRanking'] != null
+        ? PcdDistrictRanking.fromJson(json['pcdDistrictRanking'])
+        : null;
+    pcdNationalRanking = json['pcdNationalRanking'] != null
+        ? PcdNationalRanking.fromJson(json['pcdNationalRanking'])
+        : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -63,19 +63,19 @@ class CrimeDataClass {
       data['crimeAgrTable'] =
           crimeAgrTable!.map((v) => v.toJson()).toList();
     }
-    // if (crimeGeoTable != null) {
-    //   data['crimeGeoTable'] =
-    //       crimeGeoTable!.map((v) => v.toJson()).toList();
-    // }
-    // if (shortPcdRanking != null) {
-    //   data['shortPcdRanking'] = shortPcdRanking!.toJson();
-    // }
-    // if (pcdDistrictRanking != null) {
-    //   data['pcdDistrictRanking'] = pcdDistrictRanking!.toJson();
-    // }
-    // if (pcdNationalRanking != null) {
-    //   data['pcdNationalRanking'] = pcdNationalRanking!.toJson();
-    // }
+    if (crimeGeoTable != null) {
+      data['crimeGeoTable'] =
+          crimeGeoTable!.map((v) => v.toJson()).toList();
+    }
+    if (shortPcdRanking != null) {
+      data['shortPcdRanking'] = shortPcdRanking!.toJson();
+    }
+    if (pcdDistrictRanking != null) {
+      data['pcdDistrictRanking'] = pcdDistrictRanking!.toJson();
+    }
+    if (pcdNationalRanking != null) {
+      data['pcdNationalRanking'] = pcdNationalRanking!.toJson();
+    }
     return data;
   }
 }
@@ -232,7 +232,7 @@ class PcdDistrictRankingTable {
   String? pcdDistrict;
   double? crimeRateLatest;
   num? rankingDelta;
-  double? delta;
+  num? delta;
 
   PcdDistrictRankingTable(
       {this.ranking,
@@ -305,7 +305,7 @@ class PcdNationalRankingTable {
   String? area;
   double? crimeRateLatest;
   num ? rankingDelta;
-  double? delta;
+  num? delta;
 
   PcdNationalRankingTable(
       {this.ranking,
@@ -325,7 +325,7 @@ class PcdNationalRankingTable {
     area = json['area'];
     crimeRateLatest = json['crimeRateLatest'];
     rankingDelta = json['rankingDelta'];
-    // delta = json['delta'];
+    delta = json['delta'];
   }
 
   Map<String, dynamic> toJson() {
