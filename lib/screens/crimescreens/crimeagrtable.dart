@@ -46,7 +46,7 @@ class _crimeAgrTablePage extends State<CrimeAgrTablePage> {
                       label: Container(
                           padding: EdgeInsets.all(16.0),
                           alignment: Alignment.center,
-                          child: Text(
+                          child: const Text(
                             'Crime Type',
                           ))),
                   GridColumn(
@@ -60,7 +60,7 @@ class _crimeAgrTablePage extends State<CrimeAgrTablePage> {
                       label: Container(
                           padding: EdgeInsets.all(8.0),
                           alignment: Alignment.center,
-                          child: Text(
+                          child: const Text(
                             'Diference',
                             overflow: TextOverflow.ellipsis,
                           ))),

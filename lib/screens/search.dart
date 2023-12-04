@@ -17,7 +17,6 @@ class _SearchPageState extends State<SearchPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(title: Text('Input Page')),
       body: Column(
         children: [Padding(
               padding: const EdgeInsets.fromLTRB(10, 350, 10, 15),
@@ -30,7 +29,7 @@ class _SearchPageState extends State<SearchPage> {
               ),
             ),
           ElevatedButton(
-            child: Text('Fetch Data'),
+            child: const Text('Fetch Data'),
             onPressed: () async {
               futureAlbum = fetchAlbum(postcodeInputController.text);
               final result = await futureAlbum;
